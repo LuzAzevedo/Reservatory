@@ -1,0 +1,258 @@
+#:kivy 1.11.1
+
+<MainWidget>:
+    orientation: 'vertical'
+    canvas:
+        Color:
+            rgb: 0.5,0.5,0.5
+        Rectangle:
+            size: self.size
+    BoxLayout:
+        orientation:'horizontal'
+        size_hint: (1, 0.1)
+        spacing: 10
+        Label:
+            text: 'SUPERVISÓRIO RESERVATÓRIO v1.0'
+            size_hint_x: None
+            width: 300
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_x: None
+            width: 400
+            Label:
+                text: 'Configurações'
+            BoxLayout:
+                orientation:'horizontal'
+                Button:
+                    text: "MODBUS"
+                    on_release: root._modbusPopup.open()
+                Button:
+                    text: "Scan Time"
+                    on_release: root._scanPopup.open()
+                Button:
+                    text: "SetPoint"
+                    on_release: root._setPointPopup.open()
+
+        Image:
+            id: img_con
+            size_hint_x: None
+            width: 80
+            source: 'imgs/desconectado.png'
+            pos_hint: {'top': 1, 'right': 1}
+    FloatLayout:
+        id: floatlayout
+        canvas:
+            Color:
+                rgb: 1,1,1
+            Rectangle:
+                size: self.size
+        Image:
+            source: 'imgs/Refinaria1.png'
+        
+        Label:
+            id: lb_temp
+            size_hint: (None, None)
+            size: (termometro.size[0]*0.8,termometro.size[1]*0.1)
+            pos_hint: {'x': 0.7, 'y': 0.5}
+            canvas:
+                Color:
+                    rgb: 0.16,0.38,0.65
+                Rectangle:
+                    size: self.size
+                    pos: (self.pos[0]*1.005, self.pos[1]*1.2)
+        Image:
+            id: termometro
+            source: 'imgs/termometro.png'
+            size_hint: 0.22,0.22
+            pos_hint: lb_temp.pos_hint
+        
+        Label:
+            id: lb_vol
+            size_hint: (None, None)
+            size: (med_vol.size[0]*0.08,med_vol.size[1]*0.8)
+            pos_hint: {'x': 0.16, 'y': 0.6}
+            canvas:
+                Color:
+                    rgb: 0.16,0.38,0.65
+                Rectangle:
+                    size: self.size
+                    pos: (self.pos[0]+self.width*5.45, self.pos[1])
+        
+        Image:
+            id: table
+            source: 'imgs/Tabela.png'
+            size_hint: 0.42,0.42
+            pos_hint: {'x': 0.58, 'y': 0.00}
+        
+        Label:
+            id: motor_freq
+            text: '[color=2961a6]--.-- Hz[/color]'
+            font_size: 12
+            halign: 'center'
+            pos_hint: {'x':0.425, 'y':-0.16}
+            markup: True
+        
+        Label:
+            id: voltage
+            text: '[color=2961a6]--.-- V[/color]'
+            font_size: 12
+            halign: 'center'
+            pos_hint: {'x':0.425, 'y':-0.198}
+            markup: True
+        
+        Label:
+            id: rotation
+            text: '[color=2961a6]--.-- rpm[/color]'
+            font_size: 12
+            halign: 'center'
+            pos_hint: {'x':0.425, 'y':-0.23}
+            markup: True
+    
+        Label:
+            id: input_power
+            text: '[color=2961a6]--.-- W[/color]'
+            font_size: 12
+            halign: 'center'
+            pos_hint: {'x':0.425, 'y':-0.27}
+            markup: True
+        
+        Label:
+            id: current
+            text: '[color=2961a6]--.-- A[/color]'
+            font_size: 12
+            halign: 'center'
+            pos_hint: {'x':0.425, 'y':-0.307}
+            markup: True
+        
+        Label:
+            id: temp_stator
+            text: '[color=2961a6]--.-- ºC[/color]'
+            font_size: 12
+            halign: 'center'
+            pos_hint: {'x':0.425, 'y':-0.344}
+            markup: True
+        
+        Label:
+            id: input_flow
+            text: '[color=2961a6]--.-- m³/s[/color]'
+            font_size: 12
+            halign: 'center'
+            pos_hint: {'x':0.425, 'y':-0.381}
+            markup: True
+        
+        Label:
+            id: level
+            text: '[color=2961a6]--.-- L[/color]'
+            font_size: 12
+            halign: 'center'
+            pos_hint: {'x':0.425, 'y':-0.418}
+            markup: True
+        
+        Image:
+            id: motor0
+            source: 'imgs/Bomba0.png'
+            size_hint: 0.17, 0.17
+            pos_hint: {'x': 0.68, 'y': 0.726}
+
+        Image:
+            id: motor1
+            source: 'imgs/Bomba1.png'
+            size_hint: 0.17, 0.0
+            pos_hint: {'x': 0.68, 'y': 0.726}
+
+        Image:
+            id: al1_img
+            source: 'imgs/alarme1.png'
+            size_hint: 0.055, 0.0
+            pos_hint: {'x': 0.21, 'y': 0.83}
+            allow_stretch: True
+        
+        Image:
+            id: al2_img
+            source: 'imgs/alarme2.png'
+            size_hint: 0.055, 0.0
+            pos_hint: {'x': 0.21, 'y': 0.83}
+            allow_stretch: True
+
+        Image:
+            id: med_vol
+            source: 'imgs/medidorvolume.png'
+            size_hint: 0.29,0.29
+            pos_hint: lb_vol.pos_hint
+        
+        Image:
+            id: sp_img
+            source: 'imgs/SetPoint.png'
+            size_hint: 0.05,0.05
+            #altura y=0.575 até y=0.85
+            pos_hint: {'x': 0.27, 'y': 0.795}
+
+        Image:
+            id: vol_high_img
+            source: 'imgs/volumehigh.png'
+            size_hint: 0.05,0.05
+            pos_hint: {'x': 0.27, 'y': 0.83625}
+
+        Image:
+            id: vol_low_img
+            source: 'imgs/volumelow.png'
+            size_hint: 0.05,0.05
+            pos_hint: {'x': 0.27, 'y': 0.58875}
+        
+        Label:
+            id: motor
+            pos_hint: {'x': 0.75, 'y':0.7}
+            font_size: 18
+            text: '[color=2961a6]OFF[/color]'
+            size_hint: (0.048, 0.048)
+            bold: True
+            halign: 'center'
+            markup: True
+
+        onOffButton:
+            id: valve_1
+            pos_hint: {'x':0.165, 'y':0.34}
+            on_press: 
+                root.onOffSwitch(self, "valve_1")
+            
+        onOffButton:
+            id: valve_2
+            pos_hint: {'x':0.165, 'y':0.198}
+            on_press: 
+                root.onOffSwitch(self, "valve_2")
+            
+        onOffButton:
+            id: valve_3
+            pos_hint: {'x':0.164, 'y':0.063}
+            on_press: 
+                root.onOffSwitch(self, "valve_3")
+        
+        Button:
+            text:"Gráfico Vazão entrada"
+            size_hint: (None, None)
+            size_hint: (0.2, 0.05)
+            pos_hint: {'right': 0.6, 'down': 1}
+            on_release: root._graphInput.open()
+
+        Button:
+            text:"Gráfico nível"
+            size_hint: (None, None)
+            size_hint: (0.2, 0.05)
+            pos_hint: {'right': 0.8, 'down': 1}
+            on_release: root._graphLevel.open()
+
+        Button:
+            text:"Dados Históricos"
+            pos_hint: {'right':1, 'down': 1}
+            size_hint: (0.2, 0.05)
+            on_release:
+                root._hgraph.open()
+
+<onOffButton@ButtonBehavior+Label>:
+    font_size: 16
+    text: '[color=2961a6]LOW[/color]'
+    size_hint: (0.05, 0.05)
+    bold: True
+    halign: 'center'
+    markup: True
+    
